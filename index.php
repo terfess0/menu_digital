@@ -2,7 +2,7 @@
 // ==== CONFIGURACIÓN DE CONEXIÓN ====
 $host = "localhost";
 $user = "colminds_menu_d";
-$pass = "MenuD123456789";
+$pass = "Menud123456789";
 $db = "menu_digital";
 
 $conn = mysqli_connect($host, $user, $pass, $db);
