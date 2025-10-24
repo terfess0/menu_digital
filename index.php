@@ -45,6 +45,7 @@ if (isset($_POST['registrar'])) {
   }
 }
 ?>
+  
 <!DOCTYPE html>
 <html lang="es">
 <head>

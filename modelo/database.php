@@ -1,11 +1,16 @@
 <?php
 $host = "localhost";
-$user = "colminds_menu_d";
-$pass = "Menud123456789";
-$db   = "colminds_menu_digital";
+$user = "colmindsss";
+$pass = "Menudd45sssssss6789";
+$db   = "colmssu_digital";
 
 $conn = mysqli_connect($host, $user, $pass, $db);
 if (!$conn) {
   die("Error de conexión: " . mysqli_connect_error());
 }
 ?>
+
+
+
+
+
