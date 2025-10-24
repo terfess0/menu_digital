@@ -107,16 +107,17 @@ if (isset($_POST['registrar'])) {
     <div class="bg-white w-full max-w-md rounded-xl p-6 shadow-lg">
       <h2 class="text-xl font-bold mb-4 text-center">Crear cuenta</h2>
       <form method="POST" class="flex flex-col gap-3">
-        <input type="text" name="nombre" placeholder="Nombre completo" required class="border p-3 rounded-lg">
-        <input type="email" name="correo" placeholder="Correo electrónico" required class="border p-3 rounded-lg">
-        <input type="text" name="telefono" placeholder="Teléfono" required class="border p-3 rounded-lg">
-        <input type="text" name="direccion" placeholder="Dirección" required class="border p-3 rounded-lg">
-        <input type="password" name="password" placeholder="Contraseña" required class="border p-3 rounded-lg">
+  <input type="text" name="nombre" placeholder="Nombre completo" required class="border p-3 rounded-lg">
+  <input type="email" name="email" placeholder="Correo electrónico" required class="border p-3 rounded-lg">
+  <input type="text" name="telefono" placeholder="Teléfono" required class="border p-3 rounded-lg">
+  <input type="text" name="direccion" placeholder="Dirección" required class="border p-3 rounded-lg">
+  <input type="password" name="contrasena" placeholder="Contraseña" required class="border p-3 rounded-lg">
 
-        <button name="registrar" class="bg-[#f26c0d] text-white py-3 rounded-lg font-bold hover:bg-[#e15d05]">
-          Registrar
-        </button>
-      </form>
+  <button name="registrar" class="bg-[#f26c0d] text-white py-3 rounded-lg font-bold hover:bg-[#e15d05]">
+    Registrar
+  </button>
+</form>
+
       <div class="text-center mt-3">
         <button id="btnCerrarModal" class="text-[#9c6c49] hover:text-[#f26c0d]">Cancelar</button>
       </div>
