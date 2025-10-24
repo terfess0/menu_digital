@@ -1,7 +1,7 @@
 <?php
 // ==== CONFIGURACIÓN DE CONEXIÓN ====
 $host = "localhost";
-$user = "colminds_menu_d";
+$user = "colminds_menu_digital";
 $pass = "Menud123456789";
 $db = "menu_digital";
 
