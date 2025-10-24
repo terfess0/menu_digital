@@ -4,7 +4,7 @@ include("database.php");
 // Obtener todos los platos por categoría
 function obtenerPlatosPorCategoria($conn, $categoria) {
   $sql = "SELECT id_plato, nombre, descripcion, precio, imagen 
-          FROM platos 
+          FROM plato 
           WHERE categoria = ?";
   $stmt = mysqli_prepare($conn, $sql);
   mysqli_stmt_bind_param($stmt, "s", $categoria);
