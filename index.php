@@ -39,13 +39,13 @@ if (isset($_POST['login'])) {
 // ==== REGISTRO ====
 if (isset($_POST['registrar'])) {
   $nombre = $_POST['nombre'];
-  $correo = $_POST['correo'];
+  $correo = $_POST['email'];
   $telefono = $_POST['telefono'];
   $direccion = $_POST['direccion'];
   $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
   $rol = 2; // Cliente por defecto
 
-  $query = "INSERT INTO usuario (nombre, correo, telefono, direccion, password, id_rol)
+  $query = "INSERT INTO usuario (nombre, email, telefono, direccion, password, id_rol)
             VALUES ('$nombre', '$correo', '$telefono', '$direccion', '$password', '$rol')";
   if (mysqli_query($conn, $query)) {
     $mensaje = "Registro exitoso. Ahora puedes iniciar sesión.";
