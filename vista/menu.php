@@ -49,14 +49,13 @@ include("modelo/consultas.php");
   <!-- CONTENIDO PRINCIPAL -->
   <main class="flex-1 px-6 md:px-20 lg:px-40 py-8">
     <?php
-    $menus = mysqli_query($conn, "SELECT id_menu, nombre, descripcion FROM menu ORDER BY id_menu ASC");
+    $menus = mysqli_query($conn, "SELECT * FROM menu WHERE disponible = 1 ORDER BY id_menu ASC");
 
-    if (mysqli_num_rows($menus) == 0) {
-      echo "<p class='text-center text-red-500 font-bold'>⚠️ No hay menús registrados en la base de datos.</p>";
-    }
-
-    while ($menu = mysqli_fetch_assoc($menus)):
-      $platos = mysqli_query($conn, "SELECT * FROM plato WHERE id_menu = ".$menu['id_menu']." AND disponible = 1");
+    if (!$menus || mysqli_num_rows($menus) == 0) {
+      echo "<p class='text-center text-red-500 font-bold mt-10'>⚠️ No hay menús disponibles.</p>";
+    } else {
+      while ($menu = mysqli_fetch_assoc($menus)):
+        $platos = mysqli_query($conn, "SELECT * FROM plato WHERE id_menu = ".$menu['id_menu']." AND disponible = 1");
     ?>
       <section class="pt-10">
         <h3 class="text-2xl font-bold mb-2 text-gray-900 dark:text-white">
@@ -65,7 +64,7 @@ include("modelo/consultas.php");
         <p class="text-gray-500 dark:text-gray-400 mb-6"><?= htmlspecialchars($menu['descripcion']) ?></p>
 
         <div class="grid grid-cols-[repeat(auto-fill,minmax(250px,1fr))] gap-6">
-          <?php if (mysqli_num_rows($platos) > 0): ?>
+          <?php if ($platos && mysqli_num_rows($platos) > 0): ?>
             <?php while ($row = mysqli_fetch_assoc($platos)): ?>
               <div class="flex flex-col gap-3 rounded-lg overflow-hidden bg-white dark:bg-gray-800 shadow-sm hover:shadow-lg transition-shadow duration-300">
                 <div class="p-4 flex flex-col flex-1">
@@ -84,7 +83,10 @@ include("modelo/consultas.php");
           <?php endif; ?>
         </div>
       </section>
-    <?php endwhile; ?>
+    <?php
+      endwhile;
+    }
+    ?>
   </main>
 
 </div>
