@@ -33,6 +33,8 @@ include("modelo/consultas.php");
 </head>
 <body class="bg-background-light dark:bg-background-dark font-display text-gray-800 dark:text-gray-200">
 <div class="flex flex-col min-h-screen">
+
+  <!-- HEADER -->
   <header class="flex items-center justify-between border-b border-gray-200 dark:border-gray-700 px-8 py-4">
     <div class="flex items-center gap-3 text-gray-900 dark:text-white">
       <div class="text-primary text-2xl">🍽️</div>
@@ -44,58 +46,47 @@ include("modelo/consultas.php");
     </button>
   </header>
 
+  <!-- CONTENIDO PRINCIPAL -->
   <main class="flex-1 px-6 md:px-20 lg:px-40 py-8">
     <?php
-    $menus = mysqli_query($conn, "SELECT id_menu, nombre FROM menu");
-while ($menu = mysqli_fetch_assoc($menus)):
-  $platos = mysqli_query($conn, "SELECT * FROM plato WHERE id_menu = ".$menu['id_menu']);
-?>
-<section class="pt-10">
-  <h3 class="text-2xl font-bold mb-6"><?= htmlspecialchars($menu['nombre']) ?></h3>
-  <div class="grid grid-cols-[repeat(auto-fill,minmax(250px,1fr))] gap-6">
-    <?php while ($row = mysqli_fetch_assoc($platos)): ?>
-      <div class="flex flex-col gap-3 rounded-lg overflow-hidden bg-white dark:bg-gray-800 shadow-sm hover:shadow-lg transition-shadow duration-300">
-        <div class="p-4 flex flex-col flex-1">
-          <p class="text-gray-900 dark:text-white text-lg font-medium"><?= htmlspecialchars($row["nombre"]) ?></p>
-          <p class="text-gray-600 dark:text-gray-300 text-sm mt-1"><?= htmlspecialchars($row["descripcion"]) ?></p>
-          <p class="text-primary text-base font-bold mt-2">$<?= number_format($row["precio"], 2) ?></p>
-        </div>
-      </div>
-    <?php endwhile; ?>
-  </div>
-</section>
-<?php endwhile; ?>
+    $menus = mysqli_query($conn, "SELECT id_menu, nombre, descripcion FROM menu ORDER BY id_menu ASC");
 
+    if (mysqli_num_rows($menus) == 0) {
+      echo "<p class='text-center text-red-500 font-bold'>⚠️ No hay menús registrados en la base de datos.</p>";
+    }
 
-    foreach ($categorias as $clave => $titulo):
-      $platos = obtenerPlatosPorCategoria($conn, $clave);
+    while ($menu = mysqli_fetch_assoc($menus)):
+      $platos = mysqli_query($conn, "SELECT * FROM plato WHERE id_menu = ".$menu['id_menu']." AND disponible = 1");
     ?>
-    <section id="<?= htmlspecialchars($clave) ?>" class="pt-10">
-      <h3 class="text-2xl font-bold mb-6 text-gray-900 dark:text-white"><?= htmlspecialchars($titulo) ?></h3>
-      <div class="grid grid-cols-[repeat(auto-fill,minmax(250px,1fr))] gap-6">
-        <?php if ($platos && mysqli_num_rows($platos) > 0): ?>
-          <?php while ($row = mysqli_fetch_assoc($platos)): ?>
-            <div class="flex flex-col gap-3 rounded-lg overflow-hidden bg-white dark:bg-gray-800 shadow-sm hover:shadow-lg transition-shadow duration-300">
-              <div class="w-full bg-center bg-cover aspect-video" 
-                   style='background-image: url("<?= htmlspecialchars($row["imagen"]) ?>")'></div>
-              <div class="p-4 flex flex-col flex-1">
-                <p class="text-gray-900 dark:text-white text-lg font-medium"><?= htmlspecialchars($row["nombre"]) ?></p>
-                <p class="text-gray-600 dark:text-gray-300 text-sm mt-1 flex-grow"><?= htmlspecialchars($row["descripcion"]) ?></p>
-                <p class="text-primary text-base font-bold mt-2">€<?= number_format($row["precio"], 2) ?></p>
-                <div class="flex gap-2 mt-4">
-                  <button class="flex-1 h-12 rounded-lg bg-primary/20 dark:bg-primary/30 text-primary font-bold">Ver Detalles</button>
-                  <button class="flex-1 h-12 rounded-lg bg-primary text-white font-bold">Añadir</button>
+      <section class="pt-10">
+        <h3 class="text-2xl font-bold mb-2 text-gray-900 dark:text-white">
+          <?= htmlspecialchars($menu['nombre']) ?>
+        </h3>
+        <p class="text-gray-500 dark:text-gray-400 mb-6"><?= htmlspecialchars($menu['descripcion']) ?></p>
+
+        <div class="grid grid-cols-[repeat(auto-fill,minmax(250px,1fr))] gap-6">
+          <?php if (mysqli_num_rows($platos) > 0): ?>
+            <?php while ($row = mysqli_fetch_assoc($platos)): ?>
+              <div class="flex flex-col gap-3 rounded-lg overflow-hidden bg-white dark:bg-gray-800 shadow-sm hover:shadow-lg transition-shadow duration-300">
+                <div class="p-4 flex flex-col flex-1">
+                  <p class="text-gray-900 dark:text-white text-lg font-medium"><?= htmlspecialchars($row["nombre"]) ?></p>
+                  <p class="text-gray-600 dark:text-gray-300 text-sm mt-1"><?= htmlspecialchars($row["descripcion"]) ?></p>
+                  <p class="text-primary text-base font-bold mt-2">$<?= number_format($row["precio"], 2) ?></p>
+                  <div class="flex gap-2 mt-4">
+                    <button class="flex-1 h-12 rounded-lg bg-primary/20 dark:bg-primary/30 text-primary font-bold">Ver Detalles</button>
+                    <button class="flex-1 h-12 rounded-lg bg-primary text-white font-bold">Añadir</button>
+                  </div>
                 </div>
               </div>
-            </div>
-          <?php endwhile; ?>
-        <?php else: ?>
-          <p class="text-gray-500 dark:text-gray-400">Sin platos disponibles.</p>
-        <?php endif; ?>
-      </div>
-    </section>
-    <?php endforeach; ?>
+            <?php endwhile; ?>
+          <?php else: ?>
+            <p class="text-gray-500 dark:text-gray-400">No hay platos disponibles en este menú.</p>
+          <?php endif; ?>
+        </div>
+      </section>
+    <?php endwhile; ?>
   </main>
+
 </div>
 </body>
 </html>
