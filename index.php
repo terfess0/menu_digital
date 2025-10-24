@@ -14,7 +14,7 @@ if (isset($_POST['login'])) {
   $correo = $_POST['email'];
   $password = $_POST['contrasena'];
 
-  $query = "SELECT * FROM usuario WHERE correo='$correo'";
+  $query = "SELECT * FROM usuario WHERE email='$correo'";
   $result = mysqli_query($conn, $query);
 
   if ($result && mysqli_num_rows($result) > 0) {
