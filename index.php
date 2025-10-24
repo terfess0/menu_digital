@@ -55,7 +55,7 @@ if (isset($_POST['registrar'])) {
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>The Nook - Iniciar Sesión / Registro</title>
+  <title>Menu Digital - Iniciar Sesión / Registro</title>
   <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
   <link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
@@ -68,7 +68,7 @@ if (isset($_POST['registrar'])) {
   <div class="flex min-h-screen items-center justify-center">
     <div class="w-full max-w-md bg-white shadow-lg rounded-xl p-8">
       <div class="text-center mb-6">
-        <h1 class="text-3xl font-bold text-[#1c130d]">Bienvenido a The Nook</h1>
+        <h1 class="text-3xl font-bold text-[#1c130d]">Bienvenido a Menu Digital</h1>
         <p class="text-[#9c6c49]">Inicia sesión o regístrate para continuar</p>
       </div>
 
