@@ -79,13 +79,13 @@ if (isset($_POST['registrar'])) {
       <form method="POST" class="flex flex-col gap-4">
         <label>
           <p class="text-sm font-medium pb-1">Correo Electrónico</p>
-          <input type="email" name="correo" required
+          <input type="email" name="email" required
                  class="w-full border border-[#e8d9ce] rounded-lg h-12 p-3 focus:ring-2 focus:ring-[#f26c0d]"/>
         </label>
 
         <label>
           <p class="text-sm font-medium pb-1">Contraseña</p>
-          <input type="password" name="password" required
+          <input type="contrasena" name="contrasena" required
                  class="w-full border border-[#e8d9ce] rounded-lg h-12 p-3 focus:ring-2 focus:ring-[#f26c0d]"/>
         </label>
 
