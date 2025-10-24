@@ -1,8 +1,8 @@
 <?php
 $host = "localhost";
-$user = "colmindsss";
-$pass = "Menudd45sssssss6789";
-$db   = "colmssu_digital";
+$user = "colmind_menu_d";
+$pass = "Menud123456789";
+$db   = "colminds_menu_digital";
 
 $conn = mysqli_connect($host, $user, $pass, $db);
 if (!$conn) {
