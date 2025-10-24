@@ -4,16 +4,7 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-// ==== CONFIGURACIÓN DE CONEXIÓN ====
-$host = "localhost";
-$user = "colminds_menu_d";
-$pass = "Menud123456789";
-$db = "colminds_menu_digital";
-
-$conn = mysqli_connect($host, $user, $pass, $db);
-if (!$conn) {
-  die("Error de conexión: " . mysqli_connect_error());
-}
+include("modelo/database.php");
 
 // ==== LOGIN ====
 session_start();
@@ -31,7 +22,7 @@ if (isset($_POST['login'])) {
     if (password_verify($password, $row['contrasena'])) {
       $_SESSION['usuario'] = $row['nombre'];
       $_SESSION['rol'] = $row['id_rol'];
-      header("Location: menu.php");
+      header("Location: vista/menu.php");
       exit();
     } else {
       $mensaje = "Contraseña incorrecta.";
