@@ -14,7 +14,7 @@ function obtenerPlatos($conn, $categoria) {
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Menú del Restaurante</title>
-  <link rel="stylesheet" href="estilos.css">
+  <link rel="stylesheet" href="styles/menu.css">
 </head>
 <body>
   <header class="encabezado">
