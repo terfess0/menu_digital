@@ -1,4 +1,9 @@
 <?php
+//codigo para mostrar errores
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
 // ==== CONFIGURACIÓN DE CONEXIÓN ====
 $host = "localhost";
 $user = "colminds_menu_d";
