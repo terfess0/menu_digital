@@ -46,12 +46,26 @@ include("modelo/consultas.php");
 
   <main class="flex-1 px-6 md:px-20 lg:px-40 py-8">
     <?php
-    $categorias = [
-      'entradas' => 'Entradas',
-      'platos_principales' => 'Platos Principales',
-      'postres' => 'Postres',
-      'bebidas' => 'Bebidas'
-    ];
+    $menus = mysqli_query($conn, "SELECT id_menu, nombre FROM menu");
+while ($menu = mysqli_fetch_assoc($menus)):
+  $platos = mysqli_query($conn, "SELECT * FROM plato WHERE id_menu = ".$menu['id_menu']);
+?>
+<section class="pt-10">
+  <h3 class="text-2xl font-bold mb-6"><?= htmlspecialchars($menu['nombre']) ?></h3>
+  <div class="grid grid-cols-[repeat(auto-fill,minmax(250px,1fr))] gap-6">
+    <?php while ($row = mysqli_fetch_assoc($platos)): ?>
+      <div class="flex flex-col gap-3 rounded-lg overflow-hidden bg-white dark:bg-gray-800 shadow-sm hover:shadow-lg transition-shadow duration-300">
+        <div class="p-4 flex flex-col flex-1">
+          <p class="text-gray-900 dark:text-white text-lg font-medium"><?= htmlspecialchars($row["nombre"]) ?></p>
+          <p class="text-gray-600 dark:text-gray-300 text-sm mt-1"><?= htmlspecialchars($row["descripcion"]) ?></p>
+          <p class="text-primary text-base font-bold mt-2">$<?= number_format($row["precio"], 2) ?></p>
+        </div>
+      </div>
+    <?php endwhile; ?>
+  </div>
+</section>
+<?php endwhile; ?>
+
 
     foreach ($categorias as $clave => $titulo):
       $platos = obtenerPlatosPorCategoria($conn, $clave);
