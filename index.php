@@ -20,15 +20,15 @@ session_start();
 $mensaje = "";
 
 if (isset($_POST['login'])) {
-  $correo = $_POST['correo'];
-  $password = $_POST['password'];
+  $correo = $_POST['email'];
+  $password = $_POST['contrasena'];
 
   $query = "SELECT * FROM usuario WHERE correo='$correo'";
   $result = mysqli_query($conn, $query);
 
   if ($result && mysqli_num_rows($result) > 0) {
     $row = mysqli_fetch_assoc($result);
-    if (password_verify($password, $row['password'])) {
+    if (password_verify($password, $row['contrasena'])) {
       $_SESSION['usuario'] = $row['nombre'];
       $_SESSION['rol'] = $row['id_rol'];
       header("Location: menu.php");
@@ -47,11 +47,11 @@ if (isset($_POST['registrar'])) {
   $correo = $_POST['email'];
   $telefono = $_POST['telefono'];
   $direccion = $_POST['direccion'];
-  $password = password_hash($_POST['contrasena'], PASSWORD_DEFAULT);
+  $contrasena = password_hash($_POST['contrasena'], PASSWORD_DEFAULT);
   $rol = 2; // Cliente por defecto
 
   $query = "INSERT INTO usuario (nombre, email, telefono, direccion, contrasena, id_rol)
-            VALUES ('$nombre', '$correo', '$telefono', '$direccion', '$password', '$rol')";
+            VALUES ('$nombre', '$correo', '$telefono', '$direccion', '$contrasena', '$rol')";
   if (mysqli_query($conn, $query)) {
     $mensaje = "Registro exitoso. Ahora puedes iniciar sesión.";
   } else {
